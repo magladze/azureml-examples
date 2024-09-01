@@ -20,11 +20,11 @@ jobs:
     inputs:
       versionSpec: '>=3.8'
 
-  - bash: |
-      set -ex
+  - powershell: |
+      $ErrorActionPreference = "Stop"
 
       az version
-      az extension add -n ml
+      az extension add --name ml
     displayName: 'Add AzureML Extension'
 
   - task: AzureCLI@2
@@ -34,14 +34,14 @@ jobs:
       azureSubscription: $(service-connection)
       workingDirectory: 'cli/jobs/pipelines-with-components/nyc_taxi_data_regression'
       scriptLocation: inlineScript
-      scriptType: bash
+      scriptType: ps
       inlineScript: |
       
-        # submit component job and get the run name
-        job_name=$(az ml job create --file single-job-pipeline.yml -g $(resource-group) -w $(workspace) --query name --output tsv)
+        # Submit component job and get the run name
+        $jobName = az ml job create --file single-job-pipeline.yml -g $(resource-group) -w $(workspace) --query name --output tsv
 
         # Set output variable for next task
-        echo "##vso[task.setvariable variable=JOB_NAME;isOutput=true;]$job_name"
+        Write-Output "##vso[task.setvariable variable=JOB_NAME;isOutput=true;]$jobName"
   
 - job: WaitForAzureMLJobCompletion
   displayName: Wait for AzureML Job Completion
