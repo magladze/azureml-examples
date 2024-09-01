@@ -13,7 +13,7 @@ jobs:
   displayName: Submit AzureML Job
   timeoutInMinutes: 300
   pool:
-    vmImage: ubuntu-latest
+    name: test_self_hosted
   steps:
   - task: UsePythonVersion@0
     displayName: Use Python >=3.8
