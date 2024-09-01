@@ -34,7 +34,7 @@ jobs:
       azureSubscription: $(service-connection)
       workingDirectory: 'cli/jobs/pipelines-with-components/nyc_taxi_data_regression'
       scriptLocation: inlineScript
-      scriptType: pscore
+      scriptType: bash
       inlineScript: |
       
         # submit component job and get the run name
