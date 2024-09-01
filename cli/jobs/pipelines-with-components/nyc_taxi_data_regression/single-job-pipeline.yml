@@ -11,7 +11,7 @@ jobs:
     inputs:
       training_data: 
         type: uri_folder
-        path: ./data_transformed
+        path: https://github.com/magladze/azureml-examples/blob/main/cli/jobs/pipelines-with-components/nyc_taxi_data_regression/data_transformed/transformed_data.csv
     outputs:
       model_output: 
         type: mlflow_model
